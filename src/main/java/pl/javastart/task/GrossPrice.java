@@ -9,13 +9,14 @@ public class GrossPrice {
 
     double canculateTheFinalPrice() {
         String category = product.getCategory();
-        switch (category.toLowerCase()) {
+        double vat = switch (category.toLowerCase()) {
             case "drinks":
-                return product.getNetPrice() * 0.08 + product.getNetPrice();
+                yield 0.08;
             case "vegetables":
-                return product.getNetPrice() * 0.05 + product.getNetPrice();
+                yield 0.05;
             default:
-                return product.getNetPrice() * 0.23 + product.getNetPrice();
-        }
+                yield 0.23;
+        };
+        return product.getNetPrice() + (product.getNetPrice() * vat);
     }
 }
